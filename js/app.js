@@ -2,6 +2,10 @@
  * Create a list that holds all of your cards
  */
 
+let deck = document.querySelector('.deck');
+
+// console.log(listOfCards)
+console.log(deck)
 
 /*
  * Display the cards on the page
@@ -25,6 +29,24 @@ function shuffle(array) {
     return array;
 }
 
+// Suffling cards
+
+function shuffleCards() {
+    const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
+    console.log(cardsToShuffle);
+    const shuffledCards = shuffle(cardsToShuffle);
+
+    // looping through the cards and adding them to the deck
+    for(let shuffledCard of shuffledCards) {
+        console.log('adding shuffled cards to deck');
+        deck.appendChild(shuffledCard)
+    }
+
+}
+
+shuffleCards();
+
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -38,4 +60,3 @@ function shuffle(array) {
  */
 
 
- 
