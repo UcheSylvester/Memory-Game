@@ -33,12 +33,13 @@ function shuffle(array) {
 
 function shuffleCards() {
     const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
-    console.log(cardsToShuffle);
+    // console.log(cardsToShuffle);
     const shuffledCards = shuffle(cardsToShuffle);
 
     // looping through the cards and adding them to the deck
     for(let shuffledCard of shuffledCards) {
         console.log('adding shuffled cards to deck');
+        // shuffledCard.classList.add('show', 'open')
         deck.appendChild(shuffledCard)
     }
 
@@ -58,5 +59,38 @@ shuffleCards();
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+
+
+// Creating an event listener for each card on the deck
+
+let cards = deck.querySelectorAll('.card');
+let openedCards = []
+// console.log(cards)
+
+// showing and hiding cards
+function toggleCards(cardToToggle) {
+    cardToToggle.classList.toggle('open');
+    cardToToggle.classList.toggle('show')
+}
+
+// adding openedCards to openedCards Array
+function addToList(cardsToAdd) {
+    if(cardsToAdd.classList.contains('open')) {
+        openedCards.push(cardsToAdd)
+        console.log(openedCards)
+    }
+}
+
+for(let card of cards) {
+    card.addEventListener('click', function(e) {
+        toggleCards(card);
+        if(openedCards.length < 2) {
+            // console.log(openedCards.length)
+            addToList(card)
+        }
+        // addToList(card)
+    })
+}
 
 
