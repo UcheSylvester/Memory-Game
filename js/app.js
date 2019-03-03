@@ -61,12 +61,26 @@ shuffleCards();
  */
 
 
+let cards = deck.querySelectorAll('.card');
+let openedCards = [];
 
 // Creating an event listener for each card on the deck
 
-let cards = deck.querySelectorAll('.card');
-let openedCards = []
-// console.log(cards)
+for(let card of cards) {
+    card.addEventListener('click', function(e) {
+        console.log(e.target)
+        toggleCards(card);
+        if(openedCards.length < 2) {
+            console.log(openedCards)
+            addToList(card)
+            // checkMatch(card)
+        }
+        // addToList(card)
+    })
+}
+
+
+// console.log(openedCards)
 
 // showing and hiding cards
 function toggleCards(cardToToggle) {
@@ -76,21 +90,25 @@ function toggleCards(cardToToggle) {
 
 // adding openedCards to openedCards Array
 function addToList(cardsToAdd) {
-    if(cardsToAdd.classList.contains('open')) {
+    // if(cardsToAdd.classList.contains('open')) {
         openedCards.push(cardsToAdd)
-        console.log(openedCards)
+        // console.log(openedCards)
+    // }
+}
+
+function checkMatch() {
+    console.log(openedCards)
+    if(openedCards[0].lastElementChild === openedCards[1].lastElementChild) {
+        openedCards[0].classList.add('match');
+        openedCards[1].classList.add('match');
+
     }
 }
 
-for(let card of cards) {
-    card.addEventListener('click', function(e) {
-        toggleCards(card);
-        if(openedCards.length < 2) {
-            // console.log(openedCards.length)
-            addToList(card)
-        }
-        // addToList(card)
-    })
-}
+// checkMatch()
 
-
+/*
+ISSUES :
+    The first clicked element is not added to the openedCards array
+    My checkMatch function isn't working!
+*/
